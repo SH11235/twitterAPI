@@ -1,0 +1,11 @@
+{
+	"name": "TwitterAPI",
+	"dockerFile": "Dockerfile",
+	"forwardPorts": [
+		80
+	],
+	"overrideCommand": false,
+	"mounts": [
+		"source=${localWorkspaceFolder}/src,target=/var/www/html,type=bind,consistency=cached"
+	]
+}
