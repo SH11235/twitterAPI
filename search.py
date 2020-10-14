@@ -75,6 +75,7 @@ def search_tweets(CK, CKS, AT, ATS, word, count, range):
     data = response.json()['statuses']
     # 2回目以降のリクエスト
     cnt = 0
+    tweetsCount = 0
     tweets = []
     while True:
         if len(data) == 0:
@@ -83,8 +84,9 @@ def search_tweets(CK, CKS, AT, ATS, word, count, range):
         if cnt > range:
             break
         for tweet in data:
+            tweetsCount += 1
             user = tweet["user"]
-            tweets.append(str(cnt) + "件目<br>")
+            tweets.append(str(tweetsCount) + "件目<br>")
             tweets.append("name:" + user["name"] + "\n" + "<br>")
             # tweets.append(user["statuses_count"])  # 投稿数
             # tweets.append(user["friends_count"])  # フォロー数
