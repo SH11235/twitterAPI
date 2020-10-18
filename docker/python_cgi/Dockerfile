@@ -17,11 +17,11 @@ RUN pip install urllib3 requests_oauthlib requests psycopg2
 # サーバ設置ファイル
 COPY cgiserver.py /home/python
 # テスト用のHTML
-COPY index.html /home/python
+COPY html/index.html /home/python
 # cgi-binフォルダを作成
-RUN mkdir cgi-bin
-COPY search.py /home/python/cgi-bin
-COPY config.py /home/python/cgi-bin
+RUN mkdir -p cgi-bin
+COPY cgi-bin/search.py /home/python/cgi-bin
+COPY cgi-bin/config.py /home/python/cgi-bin
 RUN chmod 755 /home/python/cgi-bin/search.py
 
 # ポート番号を指定して、CGIサーバを起動
