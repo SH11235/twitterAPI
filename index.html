@@ -7,11 +7,14 @@
 </head>
 
 <body>
+	<h1>twitterで検索したいワードを入力</h1>
 	<form action="./cgi-bin/search.py" method="POST" target="result" style="text-align: center; font-size: 35px;">
 		<input type="text" name="text" value="test" />
 		<input type="submit" name="submit" />
 	</form>
-	<iframe name="result" style="height:500px;width: 95%;border:0px;margin: 0 50px 0 50px;"></iframe>
+	<h2>以下に検索結果表示</h2>
+	<iframe name="result" style="height:500px;width: 95%;border:0px;margin: 0 50px 0 50px;">
+	</iframe>
 </body>
 
 </html>
