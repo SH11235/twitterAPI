@@ -15,13 +15,13 @@ RUN apt-get update && apt-get install -y libpq-dev
 RUN pip install urllib3 requests_oauthlib requests psycopg2
 
 # サーバ設置ファイル
-ADD cgiserver.py /home/python
+COPY cgiserver.py /home/python
 # テスト用のHTML
-ADD index.html /home/python
+COPY index.html /home/python
 # cgi-binフォルダを作成
 RUN mkdir cgi-bin
-ADD search.py /home/python/cgi-bin
-ADD config.py /home/python/cgi-bin
+COPY search.py /home/python/cgi-bin
+COPY config.py /home/python/cgi-bin
 RUN chmod 755 /home/python/cgi-bin/search.py
 
 # ポート番号を指定して、CGIサーバを起動
