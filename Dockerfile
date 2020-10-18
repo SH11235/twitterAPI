@@ -8,12 +8,11 @@ RUN useradd -d /home/python -m python
 WORKDIR /home/python
 
 # pipインストール(最新版)
-RUN wget https://bootstrap.pypa.io/get-pip.py
-RUN python get-pip.py
+RUN wget https://bootstrap.pypa.io/get-pip.py | python
 
-RUN pip install urllib3
-RUN pip install requests_oauthlib
-RUN pip install requests
+# for psycopg2のインストール
+RUN apt-get update && apt-get install -y libpq-dev
+RUN pip install urllib3 requests_oauthlib requests psycopg2
 
 # サーバ設置ファイル
 ADD cgiserver.py /home/python
