@@ -17,7 +17,7 @@ RUN pip install urllib3 requests_oauthlib requests psycopg2
 # サーバ設置ファイル
 COPY cgiserver.py /home/python
 # テスト用のHTML
-COPY html/index.html /home/python
+COPY index.html /home/python
 # cgi-binフォルダを作成
 RUN mkdir -p cgi-bin
 COPY cgi-bin/search.py /home/python/cgi-bin
