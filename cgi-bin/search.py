@@ -4,32 +4,28 @@ import config
 import urllib
 from requests_oauthlib import OAuth1
 import requests
-# import sys
 import cgi
-
-# args = sys.argv
 
 
 def main():
-    # APIの秘密鍵
+    # configの値を使う
     CK = config.CONSUMER_KEY
     CKS = config.CONSUMER_SECRET
     AT = config.ACCESS_TOKEN
     ATS = config.ACCESS_SECRET
 
-    # 検索時のパラメーター
-    form = cgi.FieldStorage()
-    text = form.getvalue('text', '')
-    # word = args[1]  # 検索ワード
-    word = text  # 検索ワード
+    # フォームからキーワードを受け取る
+    word = cgi.FieldStorage().getvalue('text', '')
+
     count = 10  # 一回あたりの検索数(最大100/デフォルトは15)
     range = 10  # 検索回数の上限値(最大180/15分でリセット)
 
+    # iframeに埋め込むHTML
     html_body = """
         <!DOCTYPE html>
         <html>
         <head>
-        <title>受信したデータを表示</title>
+        <title>検索結果</title>
         <style>
         h1 {
         font-size: 3em;
@@ -43,23 +39,11 @@ def main():
         </html>
         """
 
-    path = './test.txt'
-    spacer = "=============================================\n"
-
     # ツイート検索・テキストの抽出
-    if not text:
-        print("引数でキーワードを指定")
+    if not word:
+        print("キーワードを指定してください")
     else:
         tweets = search_tweets(CK, CKS, AT, ATS, word, count, range)
-        # 検索結果を表示
-        spaceNum = 0
-        with open(path, mode='w') as f:
-            for tweet in tweets:
-                if (spaceNum % 5 == 0):
-                    f.write(spacer)
-                spaceNum += 1
-                f.write(tweet)
-
         print(html_body % (''.join(tweets)))
 
 
